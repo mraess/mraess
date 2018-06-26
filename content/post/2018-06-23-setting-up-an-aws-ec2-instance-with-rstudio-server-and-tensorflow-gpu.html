@@ -1,0 +1,87 @@
+---
+title: Setting up an AWS EC2 instance with RStudio Server and Tensorflow GPU
+author: Matthias Raess
+date: '2018-06-23'
+slug: setting-up-an-aws-ec2-instance-with-rstudio-server-and-tensorflow-gpu
+categories:
+  - AI
+  - Deep Learning
+  - Machine Learning
+tags:
+  - RStudio
+  - Tensorflow
+  - AWS
+  - EC2
+  - GPU
+  - Keras
+  
+thumbnailImagePosition: left
+thumbnailImage: https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/AWS_Simple_Icons_AWS_Cloud.svg/480px-AWS_Simple_Icons_AWS_Cloud.svg.png
+---
+
+
+
+<div id="why-this-post-is-this-another-one-of-those-redundant-blog-posts---no" class="section level2">
+<h2>Why this post (is this another one of those redundant blog posts? - No!)</h2>
+<p>The reasoning behind this post is super easy. I bought Chollet and Allaire’s super good Deep Learning with R book and wanted to follow along with the example Neural Networks in R with Keras. However, my machine does not have a GPU that is powerful enough, let alone have CUDA capabilities 🙄.</p>
+<p>Thus I set forth, as the authors suggest, to create an AWS EC2 instance on AWS. Since, this is fairly straightforward, but not as straightforward as one would like, I’ll help you out (including my RStudio Community post, and GitHub issue).</p>
+</div>
+<div id="getting-started" class="section level2">
+<h2>Getting started</h2>
+<p>If you haven’t already, create an AWS account, which will be using your existing Amazon user information (if you like).</p>
+<p>The actual set-up happens through the Amazon marketplace, where RStudio has a ready-made AMI set up that you can subscribe to .</p>
+<p>If you’re not already logged in, you do that, then you click subscribe (it is completely free).</p>
+<div class="figure">
+<img src="/post/2018-06-23-setting-up-an-aws-ec2-instance-with-rstudio-server-and-tensorflow-gpu_files/0.png" />
+
+</div>
+<p>However, the application uses a {{< hl-text orange >}} p2.xlarge instance {{< /hl-text >}}, which sets you back 0.90/hr. Now, this is not bad at all IFF you don’t forget to stop your instance after you’re done using it. Otherwise, it’s going to be 648/month (24hrs/30days).</p>
+</div>
+<div id="set-up" class="section level2">
+<h2>Set up</h2>
+<ol style="list-style-type: decimal">
+<li>Depending on where you are, select a U.S. region. Everything else can be left as is.</li>
+</ol>
+<div class="figure">
+<img src="/post/2018-06-23-setting-up-an-aws-ec2-instance-with-rstudio-server-and-tensorflow-gpu_files/1.png" />
+
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Click {{< hl-text orange >}} 'Continue to Launch.' {{< /hl-text >}}</p></li>
+<li><p>Make sure to select p2.xlarge under ‘EC2 Instance Type’</p></li>
+</ol>
+<div class="figure">
+<img src="/post/2018-06-23-setting-up-an-aws-ec2-instance-with-rstudio-server-and-tensorflow-gpu_files/2.png" />
+
+</div>
+<ol start="4" style="list-style-type: decimal">
+<li>Leave everything else as is except you can create your own security group and you will be asked to supply a Key-Pair, which you can create at this point by clicking on the link right below the textbox.</li>
+</ol>
+<div class="figure">
+<img src="/post/2018-06-23-setting-up-an-aws-ec2-instance-with-rstudio-server-and-tensorflow-gpu_files/3.png" />
+
+</div>
+<div class="figure">
+<img src="/post/2018-06-23-setting-up-an-aws-ec2-instance-with-rstudio-server-and-tensorflow-gpu_files/4.png" />
+
+</div>
+<ol start="5" style="list-style-type: decimal">
+<li>Then click {{< hl-text orange >}} 'Launch.' {{< /hl-text >}}</li>
+</ol>
+<p>Oh what holy hell is this? Yeah, you’ll not be able to Launch a p2.xlarge instance if you haven’t gotten one approved from the AWS people (because, you know, don’t mess around with it as it costs a ton of money if not handled right). </p>
+<div class="figure">
+<img src="/post/2018-06-23-setting-up-an-aws-ec2-instance-with-rstudio-server-and-tensorflow-gpu_files/5.png" />
+
+</div>
+<p>You have to click on ‘Limits’ under your EC2 dashboard and request a limit increase for p2.xlarge. They ask you what you want to do with it and then you should be good to go within 10 minutes of the request or so.</p>
+<p>Then go back to ‘Launch’ and try again. If successful, your brand new instance is going to show up under ‘Instances’. The <strong>Instance State</strong> tab shows you the state of your intance. Once running, the <strong>Public DNS</strong> tab shows you the connetion. Right click on it and select <strong>Connect</strong>.</p>
+<div class="figure">
+<img src="/post/2018-06-23-setting-up-an-aws-ec2-instance-with-rstudio-server-and-tensorflow-gpu_files/6.png" />
+
+</div>
+<p>A window is going to pop up showing you the browser address. Copy and paste that in your browser and append <strong>:8787</strong> at the end. This will take you to RStudio Server. You log in with rstudio-user and the Instance ID. Before you do anything change the password by going to the Terminal tab and punch in: passwd. This will prompt you to put in the current password (the Instance ID) and let you reset the password with your own.</p>
+<p>After this, you are good to go. In order to build a neural network load the keras-package with <code>library(keras)</code>. However, do {{< hl-text danger >}} NOT {{< /hl-text >}} run <code>install_keras(tensorflow = &quot;gpu&quot;)</code> because this is already installed and running this command will probably screw stuff up (like it did for me).</p>
+{{< alert success >}}
+That's it - happy deep learning! May your accuracy go 📈 and your loss 📉.
+{{< /alert >}}
+</div>
