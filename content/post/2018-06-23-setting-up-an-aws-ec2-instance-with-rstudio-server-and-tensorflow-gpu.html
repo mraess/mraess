@@ -21,24 +21,26 @@ thumbnailImage: https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/AWS_Si
 
 
 
-<div id="why-this-post-is-this-another-one-of-those-redundant-blog-posts---no" class="section level2">
-<h2>Why this post (is this another one of those redundant blog posts? - No!)</h2>
-<p>The reasoning behind this post is super easy. I bought Chollet and Allaire’s super good Deep Learning with R book and wanted to follow along with the example Neural Networks in R with Keras. However, my machine does not have a GPU that is powerful enough, let alone have CUDA capabilities 🙄.</p>
-<p>Thus I set forth, as the authors suggest, to create an AWS EC2 instance on AWS. Since, this is fairly straightforward, but not as straightforward as one would like, I’ll help you out (including my RStudio Community post, and GitHub issue).</p>
-</div>
-<div id="getting-started" class="section level2">
-<h2>Getting started</h2>
+<p>Why this post? Because I find it horrible when people tell you that setting something up, or getting something to work is super easy when, in fact, there are many tiny obstacles to prevent you from having a smooth start. Hence, this post - so you <strong>can</strong> get a timely start on your deep learning endeavors.</p>
+<p>I bought Chollet and Allaire’s insanely good Deep Learning with R book and wanted to follow along with the example Neural Networks in R with Keras. However, my machine does not have a GPU that is powerful enough, let alone have CUDA capabilities 🙄.</p>
+<p>Thus I set forth, as the authors suggest, to create an AWS EC2 instance. Since, this is fairly straightforward, but not as straightforward as one would like, I’ll help you out (including my RStudio Community post, and GitHub issue).</p>
+<div id="getting-started" class="section level3">
+<h3>Getting started</h3>
 <p>If you haven’t already, create an AWS account, which will be using your existing Amazon user information (if you like).</p>
-<p>The actual set-up happens through the Amazon marketplace, where RStudio has a ready-made AMI set up that you can subscribe to .</p>
+<p>The actual set-up happens through the Amazon marketplace, where RStudio has a ready-made AMI set up that you can <a href="https://aws.amazon.com/marketplace/pp/B0785SXYB2">subscribe to</a>.</p>
 <p>If you’re not already logged in, you do that, then you click subscribe (it is completely free).</p>
 <div class="figure">
 <img src="/post/2018-06-23-setting-up-an-aws-ec2-instance-with-rstudio-server-and-tensorflow-gpu_files/0.png" />
 
 </div>
-<p>However, the application uses a {{< hl-text orange >}} p2.xlarge instance {{< /hl-text >}}, which sets you back 0.90/hr. Now, this is not bad at all IFF you don’t forget to stop your instance after you’re done using it. Otherwise, it’s going to be 648/month (24hrs/30days).</p>
+<p>However, the application uses a {{< hl-text orange >}} p2.xlarge instance {{< /hl-text >}}, which sets you back $0.90/hr. Now, this is not bad at all {{< hl-text red >}} IFF {{< /hl-text >}} you don’t forget to stop your instance after you’re done using it.</p>
+{{< alert warning >}}
+Otherwise, it's going to be $648/month (24hrs/30days).
+{{< /alert >}}
+<p>{{< hl-text green >}}The good news: {{< /hl-text >}} RStudios AMI is free to use and AWS’ P2 instances come packed with power. They all have NVIDIA K80 GPUs with GPU drivers and CUDA toolkits pre-installed. The smallest (p2.xlarge) has 1 GPU, 4 vCPUs (4 virtual cores), and 61GiB (~61GB) RAM. Learn more about them <a href="https://aws.amazon.com/ec2/instance-types/p2/">here</a>.</p>
 </div>
-<div id="set-up" class="section level2">
-<h2>Set up</h2>
+<div id="set-up" class="section level3">
+<h3>Set up</h3>
 <ol style="list-style-type: decimal">
 <li>Depending on where you are, select a U.S. region. Everything else can be left as is.</li>
 </ol>
@@ -68,7 +70,7 @@ thumbnailImage: https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/AWS_Si
 <ol start="5" style="list-style-type: decimal">
 <li>Then click {{< hl-text orange >}} 'Launch.' {{< /hl-text >}}</li>
 </ol>
-<p>Oh what holy hell is this? Yeah, you’ll not be able to Launch a p2.xlarge instance if you haven’t gotten one approved from the AWS people (because, you know, don’t mess around with it as it costs a ton of money if not handled right). </p>
+<p>Oh what holy hell is this? Yeah, you’ll not be able to launch a p2.xlarge instance if you haven’t gotten one approved from the AWS people (because, you know, don’t mess around with it as it costs a ton of money if not handled right). </p>
 <div class="figure">
 <img src="/post/2018-06-23-setting-up-an-aws-ec2-instance-with-rstudio-server-and-tensorflow-gpu_files/5.png" />
 
@@ -79,7 +81,7 @@ thumbnailImage: https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/AWS_Si
 <img src="/post/2018-06-23-setting-up-an-aws-ec2-instance-with-rstudio-server-and-tensorflow-gpu_files/6.png" />
 
 </div>
-<p>A window is going to pop up showing you the browser address. Copy and paste that in your browser and append <strong>:8787</strong> at the end. This will take you to RStudio Server. You log in with rstudio-user and the Instance ID. Before you do anything change the password by going to the Terminal tab and punch in: passwd. This will prompt you to put in the current password (the Instance ID) and let you reset the password with your own.</p>
+<p>A window is going to pop up showing you the browser address. Copy and paste that in your browser and append <strong>:8787</strong> at the end. This will take you to RStudio Server. You log in with rstudio-user and the Instance ID. Before you do anything, change the password by going to the Terminal tab and punch in: ‘passwd’. This will prompt you to put in the current password (the Instance ID) and let you reset the password with your own.</p>
 <p>After this, you are good to go. In order to build a neural network load the keras-package with <code>library(keras)</code>. However, do {{< hl-text danger >}} NOT {{< /hl-text >}} run <code>install_keras(tensorflow = &quot;gpu&quot;)</code> because this is already installed and running this command will probably screw stuff up (like it did for me).</p>
 {{< alert success >}}
 That's it - happy deep learning! May your accuracy go 📈 and your loss 📉.
