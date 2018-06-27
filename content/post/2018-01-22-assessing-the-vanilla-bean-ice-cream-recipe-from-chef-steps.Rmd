@@ -4,11 +4,15 @@ author: Matthias Raess
 date: '2018-01-22'
 slug: assessing-the-vanilla-bean-ice-cream-recipe-from-chef-steps
 draft: yes
+
 categories:
   - Cooking
 tags:
   - Ice Cream
   - Dry Ice
+  
+thumbnailImagePosition: left
+thumbnailImage: https://c1.staticflickr.com/4/3660/3452599539_f5ec78a837_b.jpg
 ---
 
 You know it's about to get sciency in the kitchen when you have to pull out the good old dry-ice to churn your ice-cream base. Also you want to take some precautions because, remember, dry-ice (solid CO2) is COLD (-109.3 degrees F/-78.5 degrees C). I burned my finger when I was fishing it out of the ice-box at the store - it's still there, but recommend **not** doing that (it's like touching a hot pot or burner on your stove).
