@@ -34,7 +34,7 @@ The actual set-up happens through the Amazon marketplace, where RStudio has a re
 
 If you're not already logged in, you do that, then you click subscribe (it is completely free).
 
-![](/post/2018-06-23-setting-up-an-aws-ec2-instance-with-rstudio-server-and-tensorflow-gpu_files/0.png)
+![](/img/0.png)
 
 However, the application uses a `r htmltools::HTML("{{< hl-text orange >}} p2.xlarge instance {{< /hl-text >}}")`, which sets you back \$0.90/hr. Now, this is not bad at all `r htmltools::HTML("{{< hl-text red >}} IFF {{< /hl-text >}}")` you don't forget to stop your instance after you're done using it. 
 
