@@ -11,6 +11,7 @@ gallery:
 - //d1u9biwaxjngwg.cloudfront.net/tag-plugins-showcase/car-4.jpg "Ferrari"
 - //d1u9biwaxjngwg.cloudfront.net/tag-plugins-showcase/car-26.jpg "Lamborghini"
 - //d1u9biwaxjngwg.cloudfront.net/tag-plugins-showcase/car-18.jpg
+draft: yes
 categories:
 - tranquilpeak
 - features
