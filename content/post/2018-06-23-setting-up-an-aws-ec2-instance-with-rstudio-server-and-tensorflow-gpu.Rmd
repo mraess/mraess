@@ -44,7 +44,7 @@ Otherwise, it's going to be $648/month (24hrs/30days).
 {{< /alert >}}")
 ```
 
-`r htmltools::HTML("{{< hl-text green >}}The good news: {{< /hl-text >}}")` RStudios AMI is free to use and AWS' P2 instances come packed with power. They all have NVIDIA K80 GPUs with GPU drivers and CUDA toolkits pre-installed. The smallest (p2.xlarge) has 1 GPU, 4 vCPUs (4 virtual cores), and 61GiB (~61GB) RAM. Learn more about them [here](https://aws.amazon.com/ec2/instance-types/p2/).
+`r htmltools::HTML("{{< hl-text green >}}The good news:{{< /hl-text >}}")` RStudio's AMI is free to use and AWS' P2 instances come packed with power. They all have NVIDIA K80 GPUs with GPU drivers and CUDA toolkits pre-installed. The smallest (p2.xlarge) has 1 GPU, 4 vCPUs (4 virtual cores), and 61GiB (~61GB) RAM. Learn more about them [here](https://aws.amazon.com/ec2/instance-types/p2/).
 
 
 ### Set up
