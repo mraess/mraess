@@ -60,7 +60,7 @@ Otherwise, it's going to be $648/month (24hrs/30days).
 
 ![](/img/2.png)
 
-4. Leave everything else as is except you can create your own security group and you will be asked to supply a Key-Pair, which you can create at this point by clicking on the link right below the textbox.
+4. Leave everything else as is except you can create your own security group and you will be asked to supply a Key-Pair, which you can create at this point by clicking on the link right below the text box.
 
 ![](/img/3.png)
 
@@ -75,7 +75,7 @@ Oh what holy hell is this? Yeah, you'll not be able to launch a p2.xlarge instan
 
 You have to click on 'Limits' under your EC2 dashboard and request a limit increase for p2.xlarge. They ask you what you want to do with it and then you should be good to go within 10 minutes of the request or so.  
 
-Then go back to 'Launch' and try again. If successful, your brand new instance is going to show up under 'Instances'. The **Instance State** tab shows you the state of your intance. Once running, the **Public DNS** tab shows you the connetion. Right click on it and select **Connect**.  
+Then go back to 'Launch' and try again. If successful, your brand new instance is going to show up under 'Instances'. The **Instance State** tab shows you the state of your instance. Once running, the **Public DNS** tab shows you the connection. Right click on it and select **Connect**.  
 
 ![](/img/6.png)  
 
