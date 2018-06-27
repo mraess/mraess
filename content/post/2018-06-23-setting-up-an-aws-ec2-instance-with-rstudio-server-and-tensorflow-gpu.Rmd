@@ -81,7 +81,7 @@ Then go back to 'Launch' and try again. If successful, your brand new instance i
 
 A window is going to pop up showing you the browser address. Copy and paste that in your browser and append **:8787** at the end. This will take you to RStudio Server. You log in with rstudio-user and the Instance ID. Before you do anything,  change the password by going to the Terminal tab and punch in: 'passwd'. This will prompt you to put in the current password (the Instance ID) and let you reset the password with your own.
 
-After this, you are good to go. In order to build a neural network load the keras-package with ``` library(keras)```. However, do `r htmltools::HTML("{{< hl-text danger >}} NOT {{< /hl-text >}}")` run ```install_keras(tensorflow = "gpu")``` because this is already installed and running this command will probably screw stuff up (like it did for me).  
+After this, you are good to go. In order to build a neural network load the keras-package with ``` library(keras)```. However, do `r htmltools::HTML("{{< hl-text danger >}} NOT {{< /hl-text >}}")` run ```install_keras(tensorflow = "gpu")``` because titis already installed and running this command will probably screw stuff up (like it did for me).  
 
 
 ```{r echo=FALSE}
