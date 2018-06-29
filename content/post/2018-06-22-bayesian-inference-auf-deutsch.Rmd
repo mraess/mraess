@@ -10,6 +10,7 @@ tags:
   
 thumbnailImagePosition: left
 thumbnailImage: https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Bayes%27_Theorem_MMB_01.jpg/1200px-Bayes%27_Theorem_MMB_01.jpg
+
 ---
 
 This is my translation of <a href="https://brohrer.github.io/how_bayesian_inference_works.html#conditional" target="_blank" rel="noopener">Brandon Rohrer's blog post</a> (Nov 2, 2016) and utterly awesome explanation of Bayesian Inference.
