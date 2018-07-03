@@ -38,7 +38,7 @@ If you're not already logged in, you do that, then you click subscribe (it is co
 
 ![](/img/0.png)
 
-However, the application uses a `r htmltools::HTML("{{< hl-text orange >}} p2.xlarge instance {{< /hl-text >}}")`, which sets you back \$0.90/hr. Now, this is not bad at all `r htmltools::HTML("{{< hl-text red >}} IFF {{< /hl-text >}}")` you don't forget to stop your instance after you're done using it. 
+However, the application uses a `r htmltools::HTML("{{< hl-text orange >}} p2.xlarge instance {{< /hl-text >}}")`, which sets you back \$0.90/hr. Now, this is not bad at all `r htmltools::HTML("{{< hl-text red >}} IFF {{< /hl-text >}}")` you don't forget to stop your instance after you're done using it. Also, I have recently received my first bill and am happy to report that you only pay for the actual time used. So it seems you are not charged by the full hour.
 
 ```{r echo=FALSE}
 htmltools::HTML("{{< alert warning >}}
