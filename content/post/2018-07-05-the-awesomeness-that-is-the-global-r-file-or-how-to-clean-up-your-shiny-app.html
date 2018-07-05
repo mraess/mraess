@@ -3,7 +3,7 @@ title: The awesomeness that is the global.R file. Or how to clean up your shiny 
 author: Matthias Raess
 date: '2018-07-05'
 slug: the-awesomeness-that-is-the-global-r-file-or-how-to-clean-up-your-shiny-app
-draft: yes
+draft: no
 categories:
   - R
 tags:
@@ -21,5 +21,38 @@ output:
 ---
 
 
+<div id="TOC">
+<ul>
+<li><a href="#the-global.r-file">The global.R file</a></li>
+<li><a href="#what-does-it-do">What does it do?</a></li>
+<li><a href="#how-do-you-do-it">How do you do it?</a></li>
+<li><a href="#final-thought">Final thought</a></li>
+</ul>
+</div>
 
+<div id="the-global.r-file" class="section level3">
+<h3>The global.R file</h3>
+<p>Anybody who has ever created a shiny app or a shinydashboard has probably had the problem of the <code>ui.R</code> and <code>server.R</code> or the <code>app.R</code> files becoming very complex and crowded. Sure, if you’re app is very simple, you don’t have any side-bar with several tabs, etc. then you probably don’t know what I’m talking about, but bear with me, this might still be interesting further down the road on your journey to becoming a Shiny master.</p>
+<p>I’ve seen other people’s R code that had a <code>global.R</code> file in the app directory, but never really looked into it more. That. Was. A. Damn. Mistake! Not a big one mind you, but one that made my life harder than it needed to be.</p>
+<div class="figure">
+<img src="/img/globalR/global_thumb.png" />
 
+</div>
+</div>
+<div id="what-does-it-do" class="section level2">
+<h2>What does it do?</h2>
+<p>Think of the <code>global.R</code> file as a file that is being run once before your app starts. That means you can use it for all sorts of data processing, running models, and, of course, to load in your data.</p>
+<p>{{< hl-text orange >}} Any R objects that are created in the global.R file become available to the app.R file, or the ui.R and server.R files respectively! {{< /hl-text >}} This makes building a dashboard a lot cleaner. Now, you can handle a lot of your pre-processing in the <code>global.R</code> file and then feed the results into the <code>server.R</code> file simply by using the object. No need to use <code>source()</code> to load anything either.</p>
+</div>
+<div id="how-do-you-do-it" class="section level2">
+<h2>How do you do it?</h2>
+<div class="figure">
+<img src="/img/globalR/global2.png" />
+
+</div>
+<p>Pretty much all you have to do is crealte a <code>global.R</code> file in your app directory (see picture). Open it. You’re good to go!</p>
+</div>
+<div id="final-thought" class="section level2">
+<h2>Final thought</h2>
+<p>I wish I had utilized this thing a lot sooner! From now on, I probably won’t create a shinydashboard without it.🤘🏻😄</p>
+</div>

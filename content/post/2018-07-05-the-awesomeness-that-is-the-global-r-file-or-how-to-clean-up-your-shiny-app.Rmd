@@ -3,7 +3,7 @@ title: The awesomeness that is the global.R file. Or how to clean up your shiny 
 author: Matthias Raess
 date: '2018-07-05'
 slug: the-awesomeness-that-is-the-global-r-file-or-how-to-clean-up-your-shiny-app
-draft: yes
+draft: no
 categories:
   - R
 tags:
@@ -20,3 +20,26 @@ output:
     toc: true
 ---
 
+### The global.R file
+
+Anybody who has ever created a shiny app or a shinydashboard has probably had the problem of the `ui.R` and `server.R` or the `app.R` files becoming very complex and crowded. Sure, if you're app is very simple, you don't have any side-bar with several tabs, etc. then you probably don't know what I'm talking about, but bear with me, this might still be interesting further down the road on your journey to becoming a Shiny master.
+
+I've seen other people's R code that had a `global.R` file in the app directory, but never really looked into it more. That. Was. A. Damn. Mistake! Not a big one mind you, but one that made my life harder than it needed to be.
+
+![](/img/globalR/global_thumb.png)
+
+## What does it do?
+
+Think of the `global.R` file as a file that is being run once before your app starts. That means you can use it for all sorts of data processing, running models, and, of course, to load in your data. 
+
+`r htmltools::HTML("{{< hl-text orange >}} Any R objects that are created in the global.R file become available to the app.R file, or the ui.R and server.R files respectively! {{< /hl-text >}}")` This makes building a dashboard a lot cleaner. Now, you can handle a lot of your pre-processing in the `global.R` file and then feed the results into the `server.R` file simply by using the object. No need to use `source()` to load anything either.
+
+## How do you do it?
+
+![](/img/globalR/global2.png)
+
+Pretty much all you have to do is crealte a `global.R` file in your app directory (see picture). Open it. You're good to go!
+
+## Final thought
+
+I wish I had utilized this thing a lot sooner! From now on, I probably won't create a shinydashboard without it.🤘🏻😄
