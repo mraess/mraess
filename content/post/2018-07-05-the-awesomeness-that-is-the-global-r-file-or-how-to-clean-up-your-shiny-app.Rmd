@@ -1,0 +1,22 @@
+---
+title: The awesomeness that is the global.R file. Or how to clean up your shiny app
+author: Matthias Raess
+date: '2018-07-05'
+slug: the-awesomeness-that-is-the-global-r-file-or-how-to-clean-up-your-shiny-app
+draft: yes
+categories:
+  - R
+tags:
+  - RStudio
+  - R
+  - Shiny
+  - Shinydashboard
+  
+thumbnailImagePosition: left
+thumbnailImage: "/img/globalR/global_thumb.png"
+
+output:
+  blogdown::html_page:
+    toc: true
+---
+

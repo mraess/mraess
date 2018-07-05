@@ -11,18 +11,33 @@ tags:
 thumbnailImagePosition: left
 thumbnailImage: https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Bayes%27_Theorem_MMB_01.jpg/1200px-Bayes%27_Theorem_MMB_01.jpg
 
+output:
+  blogdown::html_page:
+    toc: true
+
 ---
 
 
+<div id="TOC">
+<ul>
+<li><a href="#bayesian-inference-im-kino">Bayesian Inference im Kino</a></li>
+<li><a href="#wahrscheinlichkeit">Wahrscheinlichkeit</a></li>
+<li><a href="#verbundwahrscheinlichkeit-joint-probability">Verbundwahrscheinlichkeit (joint probability)</a></li>
+<li><a href="#randwahrscheinlichkeit-marginal-probability">Randwahrscheinlichkeit (marginal probability)</a></li>
+<li><a href="#bayes-theorem">Bayes’ Theorem</a></li>
+<li><a href="#wahrscheinlichkeitsverteilung-probability-distributions">Wahrscheinlichkeitsverteilung (probability distributions)</a></li>
+<li><a href="#bayesian-inference-beim-tierarzt">Bayesian Inference beim Tierarzt</a></li>
+<li><a href="#bayes-fallen-vermeiden">Bayes-Fallen vermeiden</a></li>
+</ul>
+</div>
 
 <p>This is my translation of <a href="https://brohrer.github.io/how_bayesian_inference_works.html#conditional" target="_blank" rel="noopener">Brandon Rohrer’s blog post</a> (Nov 2, 2016) and utterly awesome explanation of Bayesian Inference.</p>
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be" class="uri">https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be</a></p>
 <p>Bayesian Inference kann genutzt werden um genauere Vorhersagen über einen Datensatz zu erhalten. Die Technik ist besonders dann nützlich, wenn man nicht so viele Daten hast, wie man gerne hätte - deshalb will man so viel wie möglich an Vorhersagegenauigkeit aus ihnen herausquetschen.</p>
 <p>Obwohl über Bayesian Inference manchmal mit viel Respekt gesprochen wird, ist sie weder Magie noch Mystik. Obwohl die Mathematik unter der Haube tatsächlich etwas verworren sein kann, sind die allgemeinen Konzepte absolut zugänglich. Kurzum, Bayesian Inference lässt uns genauere Schlussfolgerungen von unseren Daten ziehen, indem Wissen, dass wir über die Antwort bereits haben, mit eingebunden wird.</p>
-Bayesian Inference lässt sich auf die Ideen von Thomas Bayes, einem nonkonformistischem presbyterianischen Pfarrer, zurückführen, der vor ungefähr 300 Jahren in London lebte. Er schrieb zwei Bücher: eins zur Theologie, und eines zur Wahrscheinlichkeitsberechnung. Seine Arbeit enthielt das heute bekannte Bayes Theorem in seiner ursprünglichen Form, welches seitdem auf das Problem der Schlussfolgerung (Inference) angewandt wurde, dem technischen Begriff für eine wohlbegründete Vermutung. Die Popularität der Ideen von Bayes hat große Unterstützung von einem anderen Pfarrer, Richard Price, erhalten. Er sah ihre Bedeutung, entwickelte sie weiter und veröffentlichte sie. Es wäre daher historisch gesehen richtiger, Bayes Theorem die Bayes-Price Regel zu nennen.
-<h3>
-Bayesian Inference im Kino
-</h3>
+<p>Bayesian Inference lässt sich auf die Ideen von Thomas Bayes, einem nonkonformistischem presbyterianischen Pfarrer, zurückführen, der vor ungefähr 300 Jahren in London lebte. Er schrieb zwei Bücher: eins zur Theologie, und eines zur Wahrscheinlichkeitsberechnung. Seine Arbeit enthielt das heute bekannte Bayes Theorem in seiner ursprünglichen Form, welches seitdem auf das Problem der Schlussfolgerung (Inference) angewandt wurde, dem technischen Begriff für eine wohlbegründete Vermutung. Die Popularität der Ideen von Bayes hat große Unterstützung von einem anderen Pfarrer, Richard Price, erhalten. Er sah ihre Bedeutung, entwickelte sie weiter und veröffentlichte sie. Es wäre daher historisch gesehen richtiger, Bayes Theorem die Bayes-Price Regel zu nennen.</p>
+<div id="bayesian-inference-im-kino" class="section level3">
+<h3>Bayesian Inference im Kino</h3>
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be&amp;t=48s"><img src="/img/bayesian/bayesian_5.png" /></a></p>
 <p>Stell dir vor, du bist im Kino und eine Person dort lässt ihr Ticket fallen. Du willst natürlich ihre Aufmerksamkeit. So sieht die Person von hinten aus (Foto oben). Man kann das Geschlecht nicht feststellen, nur dass die Person lange Haare hat. Ruft man nun “Entschuldigen Sie die Dame!” oder “Entschuldigen Sie der Herr!” Davon ausgehend was man über die Haarschnitte von Männern und Frauen in Deutschland (oder der Gegend, in der du wohnst) weiß, könnte man annehmen, dass dies eine Frau ist. (In dieser Vereinfachung gibt es nur zwei Haarlängen und Geschlechter.)</p>
 <p>Jetzt stell dir eine Variation dieser Situation vor, in welcher die Person in der Schlange vor dem Männerklo steht. Mit dieser zusätzlichen Information würde man wahrscheinlich davon ausgehen, dass dies ein Mann ist. Die Benutzung von Common Sense und Welt/Hintergrundwissen ist etwas, das wir ohne großes Nachdenken tun. Bayesian Inference ist eine Methode dieses Vorgehen mit Mathematik einzufangen und dadurch genauere Vorhersagen zu treffen.</p>
@@ -30,10 +45,10 @@ Bayesian Inference im Kino
 <p>Um unserem Kinodilemma Zahlen zu geben, nimmt man an, dass ungefähr 50% Männer und 50% Frauen im Kino sind. Unter 100 Leuten, sind daher 50 Männer und 50 Frauen. Von den Frauen haben die Hälfte (25) lange Haare und die anderen 25 kurze Haare. Von den Männern haben 48 kurze Haare und 2 lange Haare. Da im Kino 25 Frauen und 2 Männer mit langen Haaren sind, liegt die Vermutung nahe, dass der Ticketbesitzer eine Frau ist.</p>
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be&amp;t=2m49s"><img src="/img/bayesian/bayesian_12.png" /></a></p>
 <p>Von 100 Leuten in der Schlange zum Männerklo jedoch sind 98 Männer und zwei Frauen, die ihren Partnern das Warten versüßen. Die Hälfte der Frauen hat immer noch lange Haare, und die andere Hälfte hat kurze Haare, aber hier ist nur eine von jeder Haarlänge in der Schlange. Die Anteile der Männer mit langen und kurzen Haare sind die gleichen, aber da es nun 98 Männer sind, haben 94 kurze Haare und 4 lange. Da es jetzt eine Frau mit langen Haaren ist, aber vier Männer, liegt nun die Annahme nahe, dass es sich bei dem Ticketbesitzer um einen Mann handelt. Dies ist ein konkretes Beispiel des Prinzips dem Bayesian Inference folgt. Da man eine wichtige Information schon vorher hat - nämlich dass der Ticketbesitzer in der Schlange für das Männerklo steht - lässt uns genauere Vorhersagen über ihn/sie treffen.</p>
-Um genau über Bayesian Inference sprechen zu können, ist es wichtig unsere Ideen klar zu definieren. Leider brauchen wir dafür etwas Mathematik. Wir werden nicht zu tief einsteigen, aber haltet euch noch ein paar Absätze ran, und es wird sich auszahlen. Um die Grundlage zu legen, brauchen wir vier Begriffe: Wahrscheinlichkeit, bedingte Wahrscheinlichkeit (conditional probability), Verbundwahrscheinlichkeit (joint probability), und Randwahrscheinlichkeit (marginal probability).
-<h3>
-Wahrscheinlichkeit
-</h3>
+<p>Um genau über Bayesian Inference sprechen zu können, ist es wichtig unsere Ideen klar zu definieren. Leider brauchen wir dafür etwas Mathematik. Wir werden nicht zu tief einsteigen, aber haltet euch noch ein paar Absätze ran, und es wird sich auszahlen. Um die Grundlage zu legen, brauchen wir vier Begriffe: Wahrscheinlichkeit, bedingte Wahrscheinlichkeit (conditional probability), Verbundwahrscheinlichkeit (joint probability), und Randwahrscheinlichkeit (marginal probability).</p>
+</div>
+<div id="wahrscheinlichkeit" class="section level3">
+<h3>Wahrscheinlichkeit</h3>
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be&amp;t=2m55s"><img src="/img/bayesian/bayesian_13.png" /></a></p>
 <p>Die Wahrscheinlichkeit, das ein Event eintritt, ist die Anzahl der verschiedenen Möglichkeiten mit denen dieses Event passieren kann, geteilt durch die Gesamtanzahl von Events die passieren können. Die Wahrscheinlichkeit, das ein Kinogänger eine Frau ist, ist 50 Frauen geteilt durch 100 Kinogänger, .5 oder 50%. Das Gleiche gilt für Männer.</p>
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be&amp;t=3m7s"><img src="/img/bayesian/bayesian_14.png" /></a></p>
@@ -46,24 +61,24 @@ Bedingte Wahrscheinlichkeit (conditional probability)
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be&amp;t=4m9s"><img src="/img/bayesian/bayesian_17.png" /></a></p>
 <p>Die selbe Mathematik angewandt, ist die bedingte Wahrscheinlichkeit, dass jemand lange Haare hat, in Anbetracht der Tatsache, dass die Person ein Mann ist, .04 (4%), ob er nun in der Schlange steht oder nicht.</p>
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be&amp;t=4m17s"><img src="/img/bayesian/bayesian_18.png" /></a></p>
-Bei bedingten Wahrscheinlichkeiten gilt es sich zu merken, dass P(A | B) nicht das gleiche ist wie P(B | A). Zum Beispiel, P(süß | Welpe)  ist nicht das gleiche wie P(Welpe | süß). Wenn das Ding, das ich halte ein Welpe ist, ist die Wahrscheinlichkeit, dass er süß ist sehr hoch. Wenn das Ding, das ich halte süß ist, dann ist die Wahrscheinlichkeit, dass es ein Welpe ist nur mittelmäßig-niedrig. Es könnte dann auch ein Kätzchen sein, ein Hase, ein Igel, oder ein kleiner Mensch.
-<h3>
-Verbundwahrscheinlichkeit (joint probabilities)
-</h3>
+<p>Bei bedingten Wahrscheinlichkeiten gilt es sich zu merken, dass P(A | B) nicht das gleiche ist wie P(B | A). Zum Beispiel, P(süß | Welpe)  ist nicht das gleiche wie P(Welpe | süß). Wenn das Ding, das ich halte ein Welpe ist, ist die Wahrscheinlichkeit, dass er süß ist sehr hoch. Wenn das Ding, das ich halte süß ist, dann ist die Wahrscheinlichkeit, dass es ein Welpe ist nur mittelmäßig-niedrig. Es könnte dann auch ein Kätzchen sein, ein Hase, ein Igel, oder ein kleiner Mensch.</p>
+</div>
+<div id="verbundwahrscheinlichkeit-joint-probability" class="section level3">
+<h3>Verbundwahrscheinlichkeit (joint probability)</h3>
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be&amp;t=5m2s"><img src="/img/bayesian/bayesian_191.png" /></a></p>
 <p>Verbundwahrscheinlichkeiten sind nützlich um die Frage “Wie hoch ist die Wahrscheinlichkeit, dass jemand eine Frau mit kurzen Haaren ist?” Die Antwort darauf zu finden ist ein Prozess mit zwei Schritten. Zuerst schaut man sich die Wahrscheinlichkeit an, mit welcher jemand eine Frau ist, P(Frau). Dann binden wir die Wahrscheinlichkeit, dass jemand kurze Haare hat, unter der Annahme dass diese Person eine Frau ist mit ein, P(kurze Haare | Frau). Kombiniert geben uns die zwei Wahrscheinlichkeiten die Verbundwahrscheinlichkeit durch Multiplikation, P(Frau mit kurzen Haaren) = P(Frau) * P(kurze Haare| Frau). Wenn man diese Herangehensweise benutzt, kann man berechnen, was wir schon wussten - dass P(Frau mit langen Haaren) unter allen Kinogängern = .25, aber dass P(Frau mit langen Haaren) in der Warteschlange für das Männerklo = .01. Die Wahrscheinlichkeiten sind unterschiedlich, da P(Frau) in beiden Fällen unterschiedlich ist.</p>
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be&amp;t=5m37s"><img src="/img/bayesian/bayesian_23.png" /></a></p>
 <p>Gleichermaßen ist P(Mann mit langen Haaren) .02 unter allen Kinogängern, aber .04 in der Warteschlange zum Männerklo.</p>
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be&amp;t=5m49s"><img src="/img/bayesian/bayesian_25.png" /></a></p>
-Im Gegensatz zu bedingten Wahrscheinlichkeiten, spielt die Reihenfolge bei Verbundwahrscheinlichkeiten keine Rolle. P(A und B) ist das Gleiche wie P(B und A). Die Wahrscheinlichkeit, dass ich Milch trinke und einen Gelee-donut esse ist die gleiche Wahrscheinlichkeit, dass ich einen Gelee-donut esse und Milch trinke.
-<h3>
-Randwahrscheinlichkeit (marginal probability)
-</h3>
+<p>Im Gegensatz zu bedingten Wahrscheinlichkeiten, spielt die Reihenfolge bei Verbundwahrscheinlichkeiten keine Rolle. P(A und B) ist das Gleiche wie P(B und A). Die Wahrscheinlichkeit, dass ich Milch trinke und einen Gelee-donut esse ist die gleiche Wahrscheinlichkeit, dass ich einen Gelee-donut esse und Milch trinke.</p>
+</div>
+<div id="randwahrscheinlichkeit-marginal-probability" class="section level3">
+<h3>Randwahrscheinlichkeit (marginal probability)</h3>
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be&amp;t=6m16s"><img src="/img/bayesian/bayesian_26.png" /></a></p>
-Der letzte Halt auf unserer Tour durch die Grundlagen sind Randwahrscheinlichkeiten. Sie sind nützlich, um die Frage “Wie hoch ist die Wahrscheinlichkeit, dass jemand lange Haare hat?” zu beantworten. Um diese Frage zu beantworten, müssen wir die Wahrscheinlichkeiten für die verschiedenen Möglichkeiten mit denen jemand lange Haare hat addieren - die Wahrscheinlichkeit ein Mann mit langen Haaren zu sein plus die Wahrscheinlichkeit eine Frau mit langen Haaren zu sein. Für die Kinobesucher bekommen wir zwei Randwahrscheinlichkeiten, P(lange Haare): .27 für alle Kinobesucher, aber .05 in der Warteschlange zum Männerklo.
-<h3>
-Bayes Theorem
-</h3>
+<p>Der letzte Halt auf unserer Tour durch die Grundlagen sind Randwahrscheinlichkeiten. Sie sind nützlich, um die Frage “Wie hoch ist die Wahrscheinlichkeit, dass jemand lange Haare hat?” zu beantworten. Um diese Frage zu beantworten, müssen wir die Wahrscheinlichkeiten für die verschiedenen Möglichkeiten mit denen jemand lange Haare hat addieren - die Wahrscheinlichkeit ein Mann mit langen Haaren zu sein plus die Wahrscheinlichkeit eine Frau mit langen Haaren zu sein. Für die Kinobesucher bekommen wir zwei Randwahrscheinlichkeiten, P(lange Haare): .27 für alle Kinobesucher, aber .05 in der Warteschlange zum Männerklo.</p>
+</div>
+<div id="bayes-theorem" class="section level3">
+<h3>Bayes’ Theorem</h3>
 <p>Nach den Grundlagen kommen wir nun zu dem Teil, der uns wirklich interessiert. Wir wollen die Frage “Wenn wir wissen, dass jemand lange Haare hat, wie hoch ist die Wahrscheinlichkeit, dass diese Person eine Frau (oder ein Mann) ist?” beantworten. Dies ist eine bedingte Wahrscheinlichkeit, P(Mann | lange Haare), aber die umgekehrte Version zu der Wahrscheinlichkeit, die wir bereits wissen, P(lange Haare | Mann). Da bedingte Wahrscheinlichkeiten nicht umkehrbar sind, können wir (noch) nichts über die neue bedingte Wahrscheinlichkeit sagen.</p>
 <p>Glücklicherweise hat Thomas Bayes etwas cooles entdeckt das uns helfen kann.</p>
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be&amp;t=6m48s"><img src="/img/bayesian/bayesian_30.png" /></a></p>
@@ -77,10 +92,10 @@ Bayes Theorem
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be&amp;t=8m13s"><img src="/img/bayesian/bayesian_36.png" /></a></p>
 <p>Zuerst müssen wir unsere Randwahrscheinlichkeit erweitern, P(lange Haare).</p>
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be&amp;t=8m28s"><img src="/img/bayesian/bayesian_37.png" /></a></p>
-Dann können wir unsere Zahlen einfügen und die Wahrscheinlichkeit, dass jemand ein Mann ist, mit dem Wissen, dass diese Person lange Haare hat berechnen. Für die Kinogänger in der Warteschlange zum Männerklo, P(Mann | lange Haare) = .8. Das bestätigt unsere Intuition, dass die Person, die das Ticket fallen gelassen hat, wahrscheinlich ein Mann ist. Bayes Theorem hat unsere Intuition in dieser Situation eingefangen. Was noch wichtiger ist, ist die Tatsache, dass es unser Vorwissen, dass es weitaus mehr Männer als Frauen in der Warteschlange zum Männerklo gibt mit einbezogen hat. Unter Einbezug unseres Vorwissen hat es unsere Annahme in dieser Situation upgedated.
-<h3>
-Wahrscheinlichkeitsverteilung (probability distributions)
-</h3>
+<p>Dann können wir unsere Zahlen einfügen und die Wahrscheinlichkeit, dass jemand ein Mann ist, mit dem Wissen, dass diese Person lange Haare hat berechnen. Für die Kinogänger in der Warteschlange zum Männerklo, P(Mann | lange Haare) = .8. Das bestätigt unsere Intuition, dass die Person, die das Ticket fallen gelassen hat, wahrscheinlich ein Mann ist. Bayes Theorem hat unsere Intuition in dieser Situation eingefangen. Was noch wichtiger ist, ist die Tatsache, dass es unser Vorwissen, dass es weitaus mehr Männer als Frauen in der Warteschlange zum Männerklo gibt mit einbezogen hat. Unter Einbezug unseres Vorwissen hat es unsere Annahme in dieser Situation upgedated.</p>
+</div>
+<div id="wahrscheinlichkeitsverteilung-probability-distributions" class="section level3">
+<h3>Wahrscheinlichkeitsverteilung (probability distributions)</h3>
 <p>Beispiele wie das Kino-dilemma eignen sich gut um den Ursprung von Bayesian Inference zu erklären und zu zeigen wie sie funktioniert. In Data Science Anwendungen jedoch, wird sie oft benutzt um Daten zu interpretieren. Indem bereits existierendes Vorwissen über das, was wir messen mit eingebunden wird, können genauere Schlussfolgerungen aus kleinen Datensatzes gezogen werden. Ich werde das im Detail zeigen, aber zuerst müssen wir uns auf einen weiteren kleinen Umweg begeben. Wir müssen klären, was wir mit “Wahrscheinlichkeitsverteilung(en)” meinen.</p>
 <p>Man kann sich Wahrscheinlichkeit als eine Kanne Kaffee vorstellen, in der noch genau so viel Kaffee ist, um eine Tasse zu füllen. Wenn es nur eine Tasse zu füllen gibt, gibt es kein Problem, aber wenn es mehrere Tassen zu füllen gilt, muss man sich entscheiden, wie der Kaffee zwischen den Tassen aufgeteilt wire. Man kann den Kaffee aufteilen wie man möchte, so lange der ganze Kaffee auf die Tassen verteilt wird. Im Kino könnte eine Tasse die Frauen, eine weitere Tasse die Männer repräsentieren.</p>
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be&amp;t=9m43s"><img src="/img/bayesian/bayesian_44.png" /></a></p>
@@ -100,10 +115,13 @@ Wahrscheinlichkeitsverteilung (probability distributions)
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be&amp;t=12m20s"><img src="/img/bayesian/bayesian_58.png" /></a></p>
 <p>Am Ende steigt die Anzahl der imaginären Tassen so stark an, dass die Analogie zusammenbricht. Ab diesem Punkt, ist die Verteilung stetig (continuous). Die Mathematik mit der man dann arbeitet verändert sich ein bisschen, aber die grundlegende Idee ist immer noch hilfreich. Sie zeigt wie unsere Vermutung verteilt wird.</p>
 <p>Danke für eure Geduld. Nachdem nun die Wahrscheinlichkeitsverteilung beschrieben ist, können wir Bayes Theorem benutzen um Daten zu interpretieren. Um zu zeigen wie das geht, wiegen wir meinen Hund.</p>
-<p>![(/img/bayesian/bayesian_62.png)</p>
-<h3>
-Bayesian Inference beim Tierarzt
-</h3>
+<div class="figure">
+<img src="/img/bayesian/bayesian_62.png" />
+
+</div>
+</div>
+<div id="bayesian-inference-beim-tierarzt" class="section level3">
+<h3>Bayesian Inference beim Tierarzt</h3>
 <p>Der Name meines Hundes ist Reign of Terror (Herrschaft des Schreckens). Immer wenn wir zum Tierarzt gehen, dreht und windet sie sich auf der Waage. Nun ist es aber wichtig ein genaues Messergebnis zu bekommen, da ich, falls ihr Gewicht angestiegen ist, die Nahrungszufuhr minimieren muss. Sie liebt ihr Essen mehr als das Leben selbst, also steht viel auf dem Spiel.</p>
 <p>Beim letzten Besuch haben wir drei Messungen geschafft bevor sie sich weigerte weiter auf der Waage zu bleiben: 19.3 lb (Pfund), 17.5 lb, und 14.1 lb. Es gibt hier ein statistisches Standardvorgehen. Wir können den Mittelwert, die Standardabweichung, und den Standardmessfehler für diese Zahlen berechnen und eine Verteilung für Reigns tatsächlichem Gewicht erstellen.</p>
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be&amp;t=14m07s"><img src="/img/bayesian/bayesian_64.png" /></a></p>
@@ -127,10 +145,11 @@ Bayesian Inference beim Tierarzt
 <p><a href="https://www.youtube.com/watch?v=5NMxiOGL39M&amp;feature=youtu.be&amp;t=21m55s"><img src="/img/bayesian/bayesian_93.png" /></a></p>
 <p>In dem eine Wahrscheinlichkeit für jedes mögliche Gewicht berechnet wird, generieren wir eine neue posterior Wahrscheinlichkeit. Die Spitze dieser posterior distribution ist auch als maximum a posteriori estimate (MAP) bekannt; in unserem Fall 14.1 Pfund. Das ist ein bedeutender Unterschied zu dem Ergebnis, dass wir mit dem uniform prior berechnet haben. Die Spitze ist auch viel enger. Dies erlaubt uns eine weitaus zuversichtlichere Schätzung zu machen. Jetzt sehen wir, dass sich Reigns Gewicht nicht sehr verändert hat und ihre Portionen genau so groß bleiben können wie sie sind.</p>
 <p>In dem wir das mit einbezogen haben, was wir über unser das was wir Messen schon gewusst haben, waren wir in der Lage eine genauere und zuversichtlichere Aussage zu treffen als anderswie. Es hat uns auch erlaubt Nutzen aus einem sehr kleinen Datensatz zu ziehen. Unser prior hat dem Gewicht von 17,5 Pfund eine sehr niedrige Wahrscheinlichkeit gegeben. Das ist fast das Gleiche, als wenn man das Messergebnis als Ausreißer ablehnt. Anstatt Ausreißer durch Intuition und Common Sense zu finden, erlaubt uns Bayes Theorem es anhand von Mathematik zu tun.</p>
-Als Randbemerkung ist zu sagen, dass wir angenommen haben das P(m) uniform war, aber hätten wir gewusst, dass unsere Skala auf irgendeine Weise verzerrt ist, hätten wir das in unsere P(m) mit einfiesen lassen können. Wenn die Skala nur gerade Zahlen hätte oder eine Messung von “2,0” 10% der Zeit ergibt, oder bei jedem dritten Versuch willkürliche Ergebnisse hätte, dann hätten wir unsere P(m) so gestalten können, das diese Sonderheiten darin wiedergegeben worden wären. Dadurch hätte sich die Genauigkeit von unserer posterior distribution verbessert.
-<h3>
-Bayes-Fallen vermeiden
-</h3>
+<p>Als Randbemerkung ist zu sagen, dass wir angenommen haben das P(m) uniform war, aber hätten wir gewusst, dass unsere Skala auf irgendeine Weise verzerrt ist, hätten wir das in unsere P(m) mit einfiesen lassen können. Wenn die Skala nur gerade Zahlen hätte oder eine Messung von “2,0” 10% der Zeit ergibt, oder bei jedem dritten Versuch willkürliche Ergebnisse hätte, dann hätten wir unsere P(m) so gestalten können, das diese Sonderheiten darin wiedergegeben worden wären. Dadurch hätte sich die Genauigkeit von unserer posterior distribution verbessert.</p>
+</div>
+<div id="bayes-fallen-vermeiden" class="section level3">
+<h3>Bayes-Fallen vermeiden</h3>
 <p>Obwohl das Wiegen von Reign die Vorteile von Bayesian Inference gezeigt hat, gibt es auch ein paar Fallen. Wir haben unsere Schätzung verbessert indem wir ein paar Vermutungen über die Antwort angestellt haben, aber der ganze Sinn etwas zu messes liegt darin etwas darüber zu lernen. Wenn wir vermuten, dass wir die Antwort bereits kennen, kann es sein, dass wir die Daten “zensieren.” Mark Twain hat die Gefahren von starken priors ganz kurz und bündig zusammengefasst. „Nicht das, was du nicht weißt, bringt dich in Schwierigkeiten, sondern das, was du sicher zu wissen glaubst, obwohl es gar nicht wahr ist.“</p>
 <p>Wenn wir mit einer starken vorherigen Vermutung, dass Reigns Gewicht zwischen 13 und 15 Pfund liegt, dann wären wir nie in der Lage zu erfassen, ob ihr Gewicht nicht tatsächlich 12,5 Pfund ist. Unser prior würde diesem Ergebnis eine Nullwahrscheinlichkeit geben, und jede Messung die unter 13 Pfund liegt, würde ignoriert werden, ganz egal wie oft wir messen.</p>
 <p>Glücklicherweise gibt es einen Weg unsere “Wette abzusichern” und es zu vermeiden blind Möglichkeiten zu eliminieren. Die Lösung ist jedem möglichen Ergebnis zumindest eine kleine Wahrscheinlichkeit zu geben. Sollte also Reign durch irgendeine physikalische Sonderheit tatsächlich 1000 Pfund wiegen, dann könnten unsere gesammelten Messergebnisse das in der posterior Wahrscheinlichkeit widerspiegeln. Dies ist ein Grund warum Normalverteilungen oft als prior verwendet werden. Sie konzentrieren den Großteil unserer Vermutung um eine kleine Bandbreite von Ergebnissen, aber sie haben lange Schweife (tails) die nie ganz Null werden ganz egal wie weit sie reichen.</p>
+</div>

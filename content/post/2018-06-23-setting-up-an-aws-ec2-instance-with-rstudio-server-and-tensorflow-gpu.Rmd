@@ -36,7 +36,7 @@ The actual set-up happens through the Amazon marketplace, where RStudio has a re
 
 If you're not already logged in, you do that, then you click subscribe (it is completely free).
 
-![](/img/0.png)
+![](/img/aws_post/0.png)
 
 However, the application uses a `r htmltools::HTML("{{< hl-text orange >}} p2.xlarge instance {{< /hl-text >}}")`, which sets you back \$0.90/hr. Now, this is not bad at all `r htmltools::HTML("{{< hl-text red >}} IFF {{< /hl-text >}}")` you don't forget to stop your instance after you're done using it. Also, I have recently received my first bill and am happy to report that you only pay for the actual time used. So it seems you are not charged by the full hour.
 
@@ -53,33 +53,33 @@ Otherwise, it's going to be $648/month (24hrs/30days).
 
 1. Depending on where you are, select a U.S. region. Everything else can be left as is.
 
-![](/img/1.png)
+![](/img/aws_post/1.png)
 
 2. Click `r htmltools::HTML("{{< hl-text orange >}} 'Continue to Launch.' {{< /hl-text >}}")`
 
 
 3. Make sure to select p2.xlarge under 'EC2 Instance Type'
 
-![](/img/2.png)
+![](/img/aws_post/2.png)
 
 4. Leave everything else as is except you can create your own security group and you will be asked to supply a Key-Pair, which you can create at this point by clicking on the link right below the text box.
 
-![](/img/3.png)
+![](/img/aws_post/3.png)
 
-![](/img/4.png)
+![](/img/aws_post/4.png)
 
 5. Then click `r htmltools::HTML("{{< hl-text orange >}} 'Launch.' {{< /hl-text >}}")`
 
 Oh what holy hell is this? Yeah, you'll not be able to launch a p2.xlarge instance if you haven't gotten one approved from the AWS people (because, you know, don't mess around with it as it costs a ton of money if not handled right).\     
 
 
-![](/img/5.png)  
+![](/img/aws_post/5.png)  
 
 You have to click on 'Limits' under your EC2 dashboard and request a limit increase for p2.xlarge. They ask you what you want to do with it and then you should be good to go within 10 minutes of the request or so.  
 
 Then go back to 'Launch' and try again. If successful, your brand new instance is going to show up under 'Instances'. The **Instance State** tab shows you the state of your instance. Once running, the **Public DNS** tab shows you the connection. Right click on it and select **Connect**.  
 
-![](/img/6.png)  
+![](/img/aws_post/6.png)  
 
 A window is going to pop up showing you the browser address. Copy and paste that in your browser and append `r htmltools::HTML("{{< hl-text yellow >}} <b>:8787</b> {{< /hl-text >}}")`  at the end. This will take you to RStudio Server. You log in with 'rstudio-user' and the Instance ID. Before you do anything,  change the password by going to the Terminal tab and punch in: 'passwd'. This will prompt you to put in the current password (the Instance ID) and let you reset the password with your own.
 

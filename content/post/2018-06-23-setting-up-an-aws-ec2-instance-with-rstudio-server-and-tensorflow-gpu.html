@@ -39,7 +39,7 @@ output:
 <p>The actual set-up happens through the Amazon marketplace, where RStudio has a ready-made AMI set up that you can <a href="https://aws.amazon.com/marketplace/pp/B0785SXYB2">subscribe to</a>.</p>
 <p>If you’re not already logged in, you do that, then you click subscribe (it is completely free).</p>
 <div class="figure">
-<img src="/img/0.png" />
+<img src="/img/aws_post/0.png" />
 
 </div>
 <p>However, the application uses a {{< hl-text orange >}} p2.xlarge instance {{< /hl-text >}}, which sets you back $0.90/hr. Now, this is not bad at all {{< hl-text red >}} IFF {{< /hl-text >}} you don’t forget to stop your instance after you’re done using it. Also, I have recently received my first bill and am happy to report that you only pay for the actual time used. So it seems you are not charged by the full hour.</p>
@@ -54,7 +54,7 @@ Otherwise, it's going to be $648/month (24hrs/30days).
 <li>Depending on where you are, select a U.S. region. Everything else can be left as is.</li>
 </ol>
 <div class="figure">
-<img src="/img/1.png" />
+<img src="/img/aws_post/1.png" />
 
 </div>
 <ol start="2" style="list-style-type: decimal">
@@ -62,18 +62,18 @@ Otherwise, it's going to be $648/month (24hrs/30days).
 <li><p>Make sure to select p2.xlarge under ‘EC2 Instance Type’</p></li>
 </ol>
 <div class="figure">
-<img src="/img/2.png" />
+<img src="/img/aws_post/2.png" />
 
 </div>
 <ol start="4" style="list-style-type: decimal">
 <li>Leave everything else as is except you can create your own security group and you will be asked to supply a Key-Pair, which you can create at this point by clicking on the link right below the text box.</li>
 </ol>
 <div class="figure">
-<img src="/img/3.png" />
+<img src="/img/aws_post/3.png" />
 
 </div>
 <div class="figure">
-<img src="/img/4.png" />
+<img src="/img/aws_post/4.png" />
 
 </div>
 <ol start="5" style="list-style-type: decimal">
@@ -81,13 +81,13 @@ Otherwise, it's going to be $648/month (24hrs/30days).
 </ol>
 <p>Oh what holy hell is this? Yeah, you’ll not be able to launch a p2.xlarge instance if you haven’t gotten one approved from the AWS people (because, you know, don’t mess around with it as it costs a ton of money if not handled right). </p>
 <div class="figure">
-<img src="/img/5.png" />
+<img src="/img/aws_post/5.png" />
 
 </div>
 <p>You have to click on ‘Limits’ under your EC2 dashboard and request a limit increase for p2.xlarge. They ask you what you want to do with it and then you should be good to go within 10 minutes of the request or so.</p>
 <p>Then go back to ‘Launch’ and try again. If successful, your brand new instance is going to show up under ‘Instances’. The <strong>Instance State</strong> tab shows you the state of your instance. Once running, the <strong>Public DNS</strong> tab shows you the connection. Right click on it and select <strong>Connect</strong>.</p>
 <div class="figure">
-<img src="/img/6.png" />
+<img src="/img/aws_post/6.png" />
 
 </div>
 <p>A window is going to pop up showing you the browser address. Copy and paste that in your browser and append {{< hl-text yellow >}} <b>:8787</b> {{< /hl-text >}} at the end. This will take you to RStudio Server. You log in with ‘rstudio-user’ and the Instance ID. Before you do anything, change the password by going to the Terminal tab and punch in: ‘passwd’. This will prompt you to put in the current password (the Instance ID) and let you reset the password with your own.</p>
