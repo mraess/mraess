@@ -19,15 +19,15 @@ knitr::opts_chunk$set(python.reticulate = FALSE)
 
 ## Using Python with R
 
-The motivation for this comes from the fact that it is easier now more than ever to use Python with R via the reticulate package.
+The motivation for this comes from the fact that it is easier now more than ever to use Python with R via the `reticulate` package.
 
-It does make a lot of sense too! I rely on packages to upload client data to S3 buckets quite a bit using R scripts and RStudio Connect for automation. Unfortunately, the aws.s3 r-package has been wonky and does not seem to be maintained.
+It does make a lot of sense too! I rely on packages to upload client data to S3 buckets quite a bit using R scripts and `RStudio Connect` for automation. Unfortunately, the `aws.s3` r-package has been wonky and does not seem to be maintained.
 
-Enter, boto3 - a Python package which lets you interface AWS S3. It is cleaner and easier to handle in terms of the set-up.
+Enter, `boto3` - a Python package which lets you interface AWS S3. It is cleaner and easier to handle in terms of the set-up.
 
 ## Example
 
-You first set up your R-script like you usually would (assuming you have Python installed and set up) with the addition of the reticulate library added.
+You first set up your R-script like you usually would (assuming you have Python installed and set up) with the addition to the `reticulate` library added.
 
 
 ```{r eval=FALSE, echo=TRUE}
