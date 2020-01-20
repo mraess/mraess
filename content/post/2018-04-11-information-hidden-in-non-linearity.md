@@ -44,6 +44,6 @@ The analysis in question investigated the relationship between age and words rel
 
 The GAM revealed a polynomial relationship between age and positive feeling words. It has a discernible U-shape in between 30-45 years, which has also been shown in previous psychological research and relates to a dip in the overall life-happiness of people. However, others have reported linear relationships, so this has to be taken with a grain of salt. In this data set, non-linearity only applied to the female participants, while the relationship was linear for the male participants. You can assess this in the GAM output, the effective degrees of freedom (an edf of 1 indicates linearity, while an edf > 1 indicates non-linearity).
 
-This is puzzling and interesting at the same time as it underscores the complexity of natural data. As always, let the data speak to you!!
+This is puzzling and interesting at the same time as it underscores the complexity of natural data.
 
 Find the GitHub repo with all the code <a href="https://github.com/mraess/dissertation_R">here</a> and the ggplot.gam.R function I used to generate the above plot <a href="https://github.com/mraess/dissertation_R/blob/master/ggplot.gam.R">here</a>.

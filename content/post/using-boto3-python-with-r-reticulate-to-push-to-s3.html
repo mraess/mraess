@@ -1,0 +1,60 @@
+---
+title: Using boto3 (Python) with R (reticulate) to push to S3
+author: Matthias Raess
+date: '2020-01-20'
+slug: python-boto3-reticulate-r
+categories:
+  - Python
+  - Reticulate
+  - R
+tags:
+  - RStudio
+keywords:
+  - tech
+---
+
+
+
+<div id="using-python-with-r" class="section level2">
+<h2>Using Python with R</h2>
+<p>The motivation for this comes from the fact that it is easier now more than ever to use Python with R via the reticulate package.</p>
+<p>It does make a lot of sense too! I rely on packages to upload client data to S3 buckets quite a bit using R scripts and RStudio Connect for automation. Unfortunately, the aws.s3 r-package has been wonky and does not seem to be maintained.</p>
+<p>Enter, boto3 - a Python package which lets you interface AWS S3. It is cleaner and easier to handle in terms of the set-up.</p>
+</div>
+<div id="example" class="section level2">
+<h2>Example</h2>
+<p>You first set up your R-script like you usually would (assuming you have Python installed and set up) with the addition of the reticulate library added.</p>
+<pre class="r"><code>library(tidyverse)
+library(reticulate)
+
+## Do stuff and write to file
+
+path &lt;- &quot;./file_name.csv&quot;
+s3_path &lt;- &quot;directory/file_name.csv&quot;
+  
+ACCESS_KEY &lt;- &quot;AWS-KEY&quot;
+SECRET_KEY &lt;- &quot;AWS-SECRET&quot;</code></pre>
+<p>Once you’re done processing data, etc. and writing results to a file, you move on to the Python section - you might have even seen the function below in some shape or form before.</p>
+<pre><code>
+# import boto3
+# 
+# 
+# def upload_to_aws(local_file, bucket, s3_file):
+#     s3 = boto3.client(&#39;s3&#39;, aws_access_key_id = r.ACCESS_KEY,
+#                       aws_secret_access_key = r.SECRET_KEY)
+# 
+#     try:
+#         s3.upload_file(local_file, bucket, s3_file, ExtraArgs={&#39;ACL&#39;:&#39;bucket-owner-full-control&#39;})
+#         print(&quot;Upload Successful&quot;)
+#         return True
+#     except FileNotFoundError:
+#         print(&quot;The file was not found&quot;)
+#         return False
+#     except NoCredentialsError:
+#         print(&quot;Credentials not available&quot;)
+#         return False
+# 
+# uploaded = upload_to_aws(r.path, &#39;bucket_name&#39;, r.path_s3)</code></pre>
+<p>The beauty of this is that you can reference r-objects easily by prepending <code>r.</code>, which allows you to not only feed your key/secret pair into the Python script but also the file paths for both the local file and the S3-path.</p>
+<p>That’s it!!</p>
+</div>
