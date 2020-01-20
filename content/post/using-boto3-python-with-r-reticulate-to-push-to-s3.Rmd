@@ -11,6 +11,9 @@ tags:
   - RStudio
 keywords:
   - tech
+  
+thumbnailImagePosition: left
+thumbnailImage: https://d33wubrfki0l68.cloudfront.net/98ad51eeaf3296af5d149485ae965b88fed7404b/5c742/assets/img/reticulate-735.jpg
 ---
 
 ```{r setup, include=FALSE}
@@ -73,3 +76,5 @@ Once you're done processing data, etc. and writing results to a file, you move o
 The beauty of this is that you can reference r-objects easily by prepending `r.`, which allows you to not only feed your key/secret pair into the Python script but also the file paths for both the local file and the S3-path.
 
 That's it!!
+
+Thumbnail copyright: RStudio
