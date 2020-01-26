@@ -1,0 +1,51 @@
+---
+title: numberFormattR - Format numbers and ggplot2 axis with k, M, B
+author: Matthias Raess
+date: '2020-01-26'
+slug: numberformattr-format-numbers-and-ggplot2-axis-with-k-m-b
+draft: yes
+categories:
+  - R
+tags:
+  - R
+  - RStudio
+keywords:
+  - tech
+---
+
+
+
+<div id="a-tiny-package-to-format-numbers" class="section level2">
+<h2>A tiny package to format numbers</h2>
+<p>I came across this ‘problem’ in a professional setting where (especially) large numbers (&gt; 1M) had to be presented in a neat and tidy way. Tools like Looker let you use Excel formatting options and short-code, such as <code>0.000,,\&quot; M\&quot;</code> for a number in millions with three decimals.</p>
+<p>I didn’t find a package that let me do that, other than the <code>sitools</code> package with some exceptions, so I wrote a very tiny package that lets you do just that; add number formatting (numbers only, and ggplot2 axis).</p>
+<p>For more information, please visit: <a href="https://github.com/mraess/numberFormattR" class="uri">https://github.com/mraess/numberFormattR</a></p>
+<p>To install the package, simply run:</p>
+<pre class="r"><code>if (!requireNamespace(&quot;devtools&quot;, quietly = TRUE))
+  install.packages(&quot;devtools&quot;)
+devtools::install_github(&#39;mraess/numberFormattR&#39;)</code></pre>
+<div id="example-1---number_formatter-function" class="section level3">
+<h3>Example 1 - <code>number_formatter()</code> function</h3>
+<pre class="r"><code>library(tidyverse)
+library(numberFormattR)
+
+map(c(1243,8798383), number_formatter, currency = TRUE, digits = 2) %&gt;% unlist()</code></pre>
+<pre><code>## [1] &quot;$1.2k&quot; &quot;$8.8M&quot;</code></pre>
+<pre class="r"><code>map(c(1243,8798383), number_formatter, currency = FALSE, digits = 4) %&gt;% unlist()</code></pre>
+<pre><code>## [1] &quot;1.243k&quot; &quot;8.798M&quot;</code></pre>
+</div>
+<div id="example-2---suffix_formatter0-function" class="section level3">
+<h3>Example 2 - <code>suffix_formatter0()</code> function</h3>
+<p>This function adds formatted number labels to ggplo2 axes. It only exists as a 0-decimal version right now.</p>
+<pre class="r"><code>library(tidyverse)
+library(numberFormattR)
+
+ggplot(data.frame(x = c(&quot;A&quot;, &quot;B&quot;), y = c(246090, 1e6)), aes(x, y, fill = x)) + 
+        geom_bar(stat = &quot;identity&quot;) + 
+        scale_y_continuous(labels = suffix_formatter_0) + 
+        scale_fill_manual(values = c(&quot;tomato&quot;, &quot;steelblue&quot;))</code></pre>
+<p><img src="/post/2020-01-26-numberformattr-format-numbers-and-ggplot2-axis-with-k-m-b_files/figure-html/example2-1.png" width="672" /></p>
+<p>Please let me know if you have any feedback, improvments. My plan is to include mapping in the function automatically at some point and have additional versions for the <code>suffix_formatter</code> function with more decimals, e.g. 3.123M.</p>
+<p>I can’t claim full credit for all the functions only for putting them in a package and adding the currency functionality. For credits, please see my github page (link above).</p>
+</div>
+</div>

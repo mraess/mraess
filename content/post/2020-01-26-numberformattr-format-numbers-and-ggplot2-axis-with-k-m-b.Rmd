@@ -1,0 +1,66 @@
+---
+title: numberFormattR - Format numbers and ggplot2 axis with k, M, B
+author: Matthias Raess
+date: '2020-01-26'
+slug: numberformattr-format-numbers-and-ggplot2-axis-with-k-m-b
+draft: yes
+categories:
+  - R
+tags:
+  - R
+  - RStudio
+keywords:
+  - tech
+
+---
+
+## A tiny package to format numbers
+
+I came across this 'problem' in a professional setting where (especially) large numbers (> 1M) had to be presented in a neat and tidy way. Tools like Looker let you use Excel formatting options and short-code, such as `0.000,,\" M\"` for a number in millions with three decimals.
+
+I didn't find a package that let me do that, other than the `sitools` package with some exceptions, so I wrote a very tiny package that lets you do just that; add number formatting (numbers only, and ggplot2 axis).
+
+For more information, please visit: https://github.com/mraess/numberFormattR
+
+To install the package, simply run:
+
+```{r, install, eval=FALSE}
+
+if (!requireNamespace("devtools", quietly = TRUE))
+  install.packages("devtools")
+devtools::install_github('mraess/numberFormattR')
+
+```
+
+### Example 1 - `number_formatter()` function
+
+```{r, example, message=FALSE, warning=FALSE}
+
+library(tidyverse)
+library(numberFormattR)
+
+map(c(1243,8798383), number_formatter, currency = TRUE, digits = 2) %>% unlist()
+
+map(c(1243,8798383), number_formatter, currency = FALSE, digits = 4) %>% unlist()
+
+```
+
+### Example 2 - `suffix_formatter0()` function
+
+This function adds formatted number labels to ggplo2 axes. It only exists as a 0-decimal version right now.
+
+```{r, example2, message=FALSE, warning=FALSE}
+
+library(tidyverse)
+library(numberFormattR)
+
+ggplot(data.frame(x = c("A", "B"), y = c(246090, 1e6)), aes(x, y, fill = x)) + 
+        geom_bar(stat = "identity") + 
+        scale_y_continuous(labels = suffix_formatter_0) + 
+        scale_fill_manual(values = c("tomato", "steelblue"))
+
+```
+
+Please let me know if you have any feedback, improvments. My plan is to include mapping in the function automatically at some point and have additional versions for the `suffix_formatter` function with more decimals, e.g. 3.123M.
+
+I can't claim full credit for all the functions only for putting them in a package and adding the currency functionality. For credits, please see my github page (link above).

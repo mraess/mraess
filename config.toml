@@ -36,7 +36,7 @@ relativeurls = true
 [author]
   name = "Matthias Raess"
   bio = "Data Science/R"
-  job = "Data Science Consultant"
+  job = "Data Analytics"
   location = "United States"
   # Your Gravatar email. Overwrite `author.picture` everywhere in the blog
   #gravatarEmail = "thibaud.lepretre@gmail.com"
