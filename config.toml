@@ -34,7 +34,7 @@ relativeurls = true
   archive = "archives"
 
 [author]
-  name = "Matthias Raess"
+  name = "Matthias Raess, Ph.D."
   bio = "Data Science/R"
   job = "Data Analytics"
   location = "United States"
