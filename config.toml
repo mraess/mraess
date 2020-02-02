@@ -15,7 +15,7 @@
 baseURL = "https://mraess.netlify.com/"
 languageCode = "en-us"
 defaultContentLanguage = "en-us"
-title = "Matthias Raess"
+title = "Matthias Raess, Ph.D."
 theme = "hugo-tranquilpeak-theme"
 #disqusShortname = "hugo-tranquilpeak-theme"
 googleAnalytics = "UA-122042640-1"

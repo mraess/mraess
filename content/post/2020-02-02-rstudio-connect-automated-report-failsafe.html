@@ -1,0 +1,67 @@
+---
+title: RStudio Connect - Automated Report Failsafe
+author: Matthias Raess
+date: '2020-02-02'
+slug: rstudio-connect-automated-report-failsafe
+categories:
+  - R
+  - RStudio
+tags:
+  - R
+  - RStudio
+  - RStudio Connect
+keywords:
+  - tech
+  
+
+---
+
+
+
+<div id="rstudio-connect" class="section level2">
+<h2>RStudio Connect</h2>
+<p>I can’t say enough good things about <a href="https://rstudio.com/products/connect/">RStudio Connect</a>! I use it on a daily basis for dashboards, applications, markdown docs, and automated internal and external (client) reports. Most recently, the team also uses it integrated with Python (via reticulate), which comes in handy when an R package has limitations for whatever reason.</p>
+<p>This post provides a quick and dirty failsafe that provides reports from sending when a condition is not met as RStudio Connect does not have a built-in solution natively as of yet.</p>
+<p>Context: When sending reports to clients, I want to ensure accuracy and data integrity, which means I don’t want a report to send IF there is no data at all or the data have the wrong timestamp for example.</p>
+<p>The example below has been working reliably for over a year now. IF a condition is not met, I get an error message from the RStudio Connect server so I can investigate without the report going out to the client.</p>
+<pre class="r"><code>#Data processing, etc. For the example assume that there is an R dataframe with your data to be #sent to the client.</code></pre>
+<pre class="r"><code>if(is_empty(your_data_frame) || is_false(max(your_data_frame$date) == Sys.Date() - 1)){
+  
+  stop(&quot;Data error! Investigate!&quot;)
+  
+} else {
+
+# Further processing
+  
+currentDate &lt;- Sys.Date() 
+
+# Set up ftp drop
+
+tempdir &lt;- tempdir() # create temporary directory
+
+client_file &lt;- paste(tempdir, &quot;/client_file&quot;, currentDate, &quot;.txt.gz&quot;,sep = &quot;&quot;) # file-path
+
+write.table(your_data_frame, file = gzfile(client_file), sep = &quot;|&quot;, row.names = FALSE) # write .txt file
+
+# check file size
+
+file_size &lt;- (file.info(client_file)$size/1024)/1024
+
+paste(round(file_size, 2), &quot;MB&quot;)
+
+#Set up ftp drop
+
+handle &lt;- getCurlHandle()
+
+outputFileName &lt;- paste(&quot;client_file_&quot;, currentDate,&quot;.txt.gz&quot;, sep=&quot;&quot;)
+
+ftpUpload(what = client_file, to = outputFileName, userpwd = Sys.getenv(&quot;user_pwd&quot;), curl = handle)
+
+}</code></pre>
+<p>Quick walk through:</p>
+<ol style="list-style-type: decimal">
+<li>To set up the conditional logic, I use two functions from the <code>rlang</code> package, <code>is_empty</code> which checks if there is any data at all in my dataframe, and <code>is_false</code>, which checks if the <code>max(date)</code> in my dataframe is in fact <code>current_date - 1</code>, which is important when your database is a day behind.</li>
+<li>I then use the <code>stop()</code> function to kill the script and give me a message. Thus, when the script runs as a scheduled job via RStudio Connect, it stops and sends an error email to my email account. The stop/error message will then be in the script log of the scheduled Rmarkdown.</li>
+<li>The <code>else</code> part contains all further processing, which runs if conditions are/are not met - depending on your set-up, e.g email send, file upload (like in this case), etc.</li>
+</ol>
+</div>
