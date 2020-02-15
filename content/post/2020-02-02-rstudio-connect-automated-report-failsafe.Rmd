@@ -13,7 +13,9 @@ tags:
 keywords:
   - tech
   
-
+thumbnailImagePosition: left
+thumbnailImage: https://image.flaticon.com/icons/svg/235/235183.svg
+  
 ---
 
 ## RStudio Connect
